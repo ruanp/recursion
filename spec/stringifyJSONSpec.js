@@ -39,13 +39,13 @@ describe("stringifyJSON", function(){
       var obj = JSON.parse(test);
       var result = stringifyJSON(obj);
       var expected = JSON.stringify(obj);
-      console.log(obj);
       expect(result).toEqual(expected);
     });
 
     weirdObjects.forEach(function(obj){
       var result = stringifyJSON(obj);
       var expected = JSON.stringify(obj);
+      console.log(obj, result, expected);
       expect(result).toEqual(expected);
     });
 

@@ -1,9 +1,5 @@
 var stringifyJSON = function(input) {
 
-  var functionStringify = function(func) {
-
-  };
-
   // Stringify method to parse out array objects
   var arrayStringify = function(array) {
     // Return empty array string
@@ -25,6 +21,7 @@ var stringifyJSON = function(input) {
 
     // Iterate through every element and call stringifyJSON recursively
     for(key in object) {
+      if(key === 'undefined') return '{}';
       if(object.hasOwnProperty(key)) {
         result += stringifyJSON(key) + ':' + stringifyJSON(object[key]) + ',';
       }
@@ -35,6 +32,10 @@ var stringifyJSON = function(input) {
 
   // Primitive types return toString() method or null
   if (typeof input === 'string') {
+    if(input.indexOf('\\') != -1) {
+      var test= input.replace(/\\/g,'\\\\').replace(/\"/g, '\\\"');
+      input = test;
+    }
     return "\"" + input + "\"";
   } else if (typeof input === 'number') {
     return input.toString();
@@ -48,12 +49,9 @@ var stringifyJSON = function(input) {
     return arrayStringify(input);
   } else if (typeof input === 'object') {
     return objectStringify(input);
-  }
-
-   else if (typeof input === 'function') {
-    return functionStringify(input);
+  } else if (typeof input === 'function') {
+    return;
   } else {
     throw new Error('WTF is this?');
   }
-
 }
