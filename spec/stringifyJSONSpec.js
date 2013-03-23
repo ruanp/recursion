@@ -45,7 +45,6 @@ describe("stringifyJSON", function(){
     weirdObjects.forEach(function(obj){
       var result = stringifyJSON(obj);
       var expected = JSON.stringify(obj);
-      console.log(obj, result, expected);
       expect(result).toEqual(expected);
     });
 

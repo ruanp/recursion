@@ -6,9 +6,9 @@ var getElementsByClassName = function(className){
   var getChildElementsByClassName = function(node, className) {
     if(node.hasChildNodes()) {
       var children = node.children;
-      for(var i=0; i < children.length; i++) {
-        getChildElementsByClassName(children[i], className);
-      }
+      _(children).each(function(child) {
+        getChildElementsByClassName(child, className);
+      });
     }
     if(node.className.match(regex)) {
       output.push(node);
